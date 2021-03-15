@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components/macro";
+import { isTouchDevice } from "../utils";
 
 interface Props {
   letter: string;
@@ -55,19 +56,28 @@ export const Letter = (props: Props) => {
 
     const handleLetterOver = () => setIsOver(true);
     const handleLetterOut = () => setIsOver(false);
+    const handleTouch = () => setIsOver(!isOver);
 
-    if (letterElement) {
+    if (letterElement && !isTouchDevice) {
       letterElement.addEventListener("mouseover", handleLetterOver);
       letterElement.addEventListener("mouseout", handleLetterOut);
     }
 
+    if (letterElement && isTouchDevice) {
+      letterElement.addEventListener("click", handleTouch);
+    }
+
     return () => {
-      if (letterElement) {
+      if (letterElement && !isTouchDevice) {
         letterElement.removeEventListener("mouseover", handleLetterOver);
         letterElement.removeEventListener("mouseout", handleLetterOut);
       }
+
+      if (letterElement && isTouchDevice) {
+        letterElement.removeEventListener("click", handleTouch);
+      }
     };
-  }, []);
+  }, [isOver]);
 
   return (
     <LetterWrapper

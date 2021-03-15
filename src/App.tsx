@@ -28,6 +28,8 @@ const ButtonWrapper = styled.div<{ isTabletViewport: boolean }>((props) => {
 
     ${isTabletViewport &&
     css`
+      width: 90%;
+
       > button:nth-child(1) {
         width: 100%;
         margin-bottom: 1rem;
