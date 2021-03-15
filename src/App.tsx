@@ -1,24 +1,87 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components/macro";
+import { newLetter } from "./utils";
+import { useIsTabletViewport } from "./hooks";
+import { Letter, Button } from "./components";
+
+import random from "./assets/random.svg";
+
+const ButtonWrapper = styled.div<{ isTabletViewport: boolean }>((props) => {
+  const { isTabletViewport } = props;
+
+  return css`
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    ${!isTabletViewport &&
+    css`
+      > button:nth-child(1) {
+        margin-right: 0.5rem;
+      }
+
+      > button:nth-child(2) {
+        margin-left: 0.5rem;
+      }
+    `}
+
+    ${isTabletViewport &&
+    css`
+      > button:nth-child(1) {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      > button:nth-child(2) {
+        width: 100%;
+      }
+    `}
+  `;
+});
+
+const Image = styled.img`
+  width: 1.5rem;
+  height: 1.5rem;
+`;
 
 function App() {
+  const [letter, setLetter] = useState(newLetter());
+  const [isSign, setIsSign] = useState(false);
+
+  const isTabletViewport = useIsTabletViewport();
+
+  useEffect(() => {
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.keyCode === 32) {
+        setLetter(newLetter);
+      }
+    };
+
+    document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  const handleToggleIsSign = () => {
+    setIsSign(!isSign);
+  };
+
+  const handleLetterChange = () => {
+    setLetter(newLetter);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Letter letter={letter} isSign={isSign} />
+      <ButtonWrapper isTabletViewport={isTabletViewport}>
+        <Button onClick={handleToggleIsSign}>Toggle Sign/Letter</Button>
+        <Button onClick={handleLetterChange}>
+          <Image src={random} alt="" />
+        </Button>
+      </ButtonWrapper>
     </div>
   );
 }
