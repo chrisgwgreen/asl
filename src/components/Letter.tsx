@@ -12,11 +12,9 @@ const LetterWrapper = styled.div<{ isSign: boolean; isOver: boolean }>(
     const { isSign, isOver } = props;
 
     return css`
-      position: absolute;
-      left: 50%;
-      top: 40%;
-      transform: translate(-50%, -50%);
-      font-size: 500px;
+      text-align: center;
+      font-size: 65vh;
+
       cursor: pointer;
       display: block;
 

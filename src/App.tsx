@@ -76,15 +76,16 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       <Letter letter={letter} isSign={isSign} />
+
       <ButtonWrapper isTabletViewport={isTabletViewport}>
         <Button onClick={handleToggleIsSign}>Toggle Sign/Letter</Button>
         <Button onClick={handleLetterChange}>
           <Image src={random} alt="" />
         </Button>
       </ButtonWrapper>
-    </div>
+    </>
   );
 }
 
