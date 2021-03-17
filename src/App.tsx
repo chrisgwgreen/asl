@@ -47,9 +47,16 @@ const Image = styled.img`
   height: 1.5rem;
 `;
 
+const SignToggleWrapper = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+`;
+
 function App() {
   const [letter, setLetter] = useState(newLetter());
   const [isSign, setIsSign] = useState(false);
+  const [isASL, setIsASL] = useState(false);
 
   const isTabletViewport = useIsTabletViewport();
 
@@ -71,13 +78,21 @@ function App() {
     setIsSign(!isSign);
   };
 
+  const handleToggleIsASL = () => {
+    setIsASL(!isASL);
+  };
+
   const handleLetterChange = () => {
     setLetter(newLetter);
   };
 
   return (
     <>
-      <Letter letter={letter} isSign={isSign} />
+      <Letter letter={letter} isSign={isSign} isASL={isASL} />
+
+      <SignToggleWrapper>
+        <Button onClick={handleToggleIsASL}>{isASL ? "ASL" : "BSL"}</Button>
+      </SignToggleWrapper>
 
       <ButtonWrapper isTabletViewport={isTabletViewport}>
         <Button onClick={handleToggleIsSign}>Toggle Sign/Letter</Button>

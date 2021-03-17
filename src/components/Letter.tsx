@@ -5,47 +5,60 @@ import { isTouchDevice } from "../utils";
 interface Props {
   letter: string;
   isSign: boolean;
+  isASL: boolean;
 }
 
-const LetterWrapper = styled.div<{ isSign: boolean; isOver: boolean }>(
-  (props) => {
-    const { isSign, isOver } = props;
+const LetterWrapper = styled.div<{
+  isSign: boolean;
+  isOver: boolean;
+  isASL: boolean;
+}>((props) => {
+  const { isSign, isOver, isASL } = props;
 
-    return css`
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 65vh;
+  return css`
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: calc(50% - 50px);
+    transform: translate(-50%, -50%);
+    left: 50%;
+    font-size: 65vh;
 
-      cursor: pointer;
-      display: block;
+    cursor: pointer;
+    display: block;
 
-      ${isSign &&
-      isOver &&
-      css`
-        font-family: normal;
-      `}
+    ${isSign &&
+    isOver &&
+    css`
+      font-family: normal;
+    `}
 
-      ${!isSign &&
-      css`
-        font-family: normal;
-      `}
+    ${!isSign &&
+    css`
+      font-family: normal;
+    `}
 
-      ${isSign &&
-      css`
-        font-family: bsl;
-      `}
+    ${isSign &&
+    css`
+      font-family: ${isASL ? `asl` : `bsl`};
+    `}
 
-      ${!isSign &&
-      isOver &&
-      css`
-        font-family: bsl;
-      `}
-    `;
-  }
-);
+    ${!isSign &&
+    isOver &&
+    css`
+      font-family: ${isASL ? `asl` : `bsl`};
+    `}
+
+    ${!isASL &&
+    (isSign || (!isSign && isOver)) &&
+    css`
+      font-size: 40vh;
+    `}
+  `;
+});
 
 export const Letter = (props: Props) => {
-  const { letter, isSign } = props;
+  const { letter, isSign, isASL } = props;
 
   const [isOver, setIsOver] = useState(false);
 
@@ -82,6 +95,7 @@ export const Letter = (props: Props) => {
   return (
     <LetterWrapper
       isSign={isSign}
+      isASL={isASL}
       isOver={isOver}
       ref={(ref) => {
         letterWrapper.current = ref as HTMLDivElement;
