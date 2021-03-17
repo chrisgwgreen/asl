@@ -13,30 +13,32 @@ const LetterWrapper = styled.div<{ isSign: boolean; isOver: boolean }>(
 
     return css`
       text-align: center;
+      text-transform: uppercase;
       font-size: 65vh;
 
       cursor: pointer;
       display: block;
 
       ${isSign &&
+      isOver &&
       css`
-        font-family: sign;
+        font-family: normal;
       `}
+
+      ${!isSign &&
+      css`
+        font-family: normal;
+      `}
+
       ${isSign &&
-      isOver &&
       css`
-        font-family: normal;
-      `}
-
-      ${!isSign &&
-      css`
-        font-family: normal;
+        font-family: bsl;
       `}
 
       ${!isSign &&
       isOver &&
       css`
-        font-family: sign;
+        font-family: bsl;
       `}
     `;
   }
