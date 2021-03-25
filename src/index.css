@@ -15,6 +15,14 @@
 }
 
 @font-face {
+  font-family: isl;
+  src: url("./fonts/isl.woff2") format("woff2"),
+    url("./fonts/isl.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: normal;
   src: url("./fonts/mayblossom-webfont.woff2") format("woff2"),
     url("./fonts/mayblossom-webfont.woff") format("woff");

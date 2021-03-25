@@ -1,19 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components/macro";
+import { language } from "../types";
 import { isTouchDevice } from "../utils";
 
 interface Props {
   letter: string;
   isSign: boolean;
-  isASL: boolean;
+  language: language;
 }
 
 const LetterWrapper = styled.div<{
   isSign: boolean;
   isOver: boolean;
-  isASL: boolean;
+  language: language;
 }>((props) => {
-  const { isSign, isOver, isASL } = props;
+  const { isSign, isOver, language } = props;
 
   return css`
     text-align: center;
@@ -22,7 +23,7 @@ const LetterWrapper = styled.div<{
     top: calc(50% - 50px);
     transform: translate(-50%, -50%);
     left: 50%;
-    font-size: 65vh;
+    font-size: 40vh;
 
     cursor: pointer;
     display: block;
@@ -40,25 +41,37 @@ const LetterWrapper = styled.div<{
 
     ${isSign &&
     css`
-      font-family: ${isASL ? `asl` : `bsl`};
+      font-family: ${language};
     `}
 
     ${!isSign &&
     isOver &&
     css`
-      font-family: ${isASL ? `asl` : `bsl`};
+      font-family: ${language};
     `}
 
-    ${!isASL &&
+    ${language === "asl" &&
+    (isSign || (!isSign && isOver)) &&
+    css`
+      font-size: 65vh;
+    `}
+
+    ${language === "bsl" &&
     (isSign || (!isSign && isOver)) &&
     css`
       font-size: 40vh;
+    `}
+    
+    ${language === "isl" &&
+    (isSign || (!isSign && isOver)) &&
+    css`
+      font-size: 35vh;
     `}
   `;
 });
 
 export const Letter = (props: Props) => {
-  const { letter, isSign, isASL } = props;
+  const { letter, isSign, language } = props;
 
   const [isOver, setIsOver] = useState(false);
 
@@ -95,7 +108,7 @@ export const Letter = (props: Props) => {
   return (
     <LetterWrapper
       isSign={isSign}
-      isASL={isASL}
+      language={language}
       isOver={isOver}
       ref={(ref) => {
         letterWrapper.current = ref as HTMLDivElement;
@@ -105,3 +118,7 @@ export const Letter = (props: Props) => {
     </LetterWrapper>
   );
 };
+
+/* 
+    ${!isASL &&
+    */

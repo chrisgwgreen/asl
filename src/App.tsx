@@ -3,7 +3,7 @@ import styled, { css } from "styled-components/macro";
 import { newLetter } from "./utils";
 import { useIsTabletViewport } from "./hooks";
 import { Letter, Button } from "./components";
-
+import { language } from "./types";
 import random from "./assets/random.svg";
 
 const ButtonWrapper = styled.div<{ isTabletViewport: boolean }>((props) => {
@@ -56,7 +56,7 @@ const SignToggleWrapper = styled.div`
 function App() {
   const [letter, setLetter] = useState(newLetter());
   const [isSign, setIsSign] = useState(false);
-  const [isASL, setIsASL] = useState(false);
+  const [language, setLanguage] = useState<language>("asl");
 
   const isTabletViewport = useIsTabletViewport();
 
@@ -78,8 +78,18 @@ function App() {
     setIsSign(!isSign);
   };
 
-  const handleToggleIsASL = () => {
-    setIsASL(!isASL);
+  const handleChangeLanguage = () => {
+    switch (language) {
+      case "asl":
+        setLanguage("bsl");
+        break;
+      case "bsl":
+        setLanguage("isl");
+        break;
+      case "isl":
+        setLanguage("asl");
+        break;
+    }
   };
 
   const handleLetterChange = () => {
@@ -88,10 +98,10 @@ function App() {
 
   return (
     <>
-      <Letter letter={letter} isSign={isSign} isASL={isASL} />
+      <Letter letter={letter} isSign={isSign} language={language} />
 
       <SignToggleWrapper>
-        <Button onClick={handleToggleIsASL}>{isASL ? "ASL" : "BSL"}</Button>
+        <Button onClick={handleChangeLanguage}>{language.toUpperCase()}</Button>
       </SignToggleWrapper>
 
       <ButtonWrapper isTabletViewport={isTabletViewport}>
