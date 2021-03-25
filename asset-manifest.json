@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/asl/static/css/main.136ece11.chunk.css",
-    "main.js": "/asl/static/js/main.8faa4844.chunk.js",
-    "main.js.map": "/asl/static/js/main.8faa4844.chunk.js.map",
+    "main.css": "/asl/static/css/main.f6ccab2f.chunk.css",
+    "main.js": "/asl/static/js/main.51e40be7.chunk.js",
+    "main.js.map": "/asl/static/js/main.51e40be7.chunk.js.map",
     "runtime-main.js": "/asl/static/js/runtime-main.64dac4bf.js",
     "runtime-main.js.map": "/asl/static/js/runtime-main.64dac4bf.js.map",
     "static/js/2.fa126241.chunk.js": "/asl/static/js/2.fa126241.chunk.js",
     "static/js/2.fa126241.chunk.js.map": "/asl/static/js/2.fa126241.chunk.js.map",
     "index.html": "/asl/index.html",
-    "static/css/main.136ece11.chunk.css.map": "/asl/static/css/main.136ece11.chunk.css.map",
+    "static/css/main.f6ccab2f.chunk.css.map": "/asl/static/css/main.f6ccab2f.chunk.css.map",
     "static/js/2.fa126241.chunk.js.LICENSE.txt": "/asl/static/js/2.fa126241.chunk.js.LICENSE.txt",
     "static/media/index.css": "/asl/static/media/mayblossom-webfont.3e93bff2.woff2",
     "static/media/random.90637106.svg": "/asl/static/media/random.90637106.svg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.64dac4bf.js",
     "static/js/2.fa126241.chunk.js",
-    "static/css/main.136ece11.chunk.css",
-    "static/js/main.8faa4844.chunk.js"
+    "static/css/main.f6ccab2f.chunk.css",
+    "static/js/main.51e40be7.chunk.js"
   ]
 }
