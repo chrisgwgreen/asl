@@ -81,12 +81,15 @@ function App() {
   const handleChangeLanguage = () => {
     switch (language) {
       case "asl":
+        document.title = "BSL";
         setLanguage("bsl");
         break;
       case "bsl":
+        document.title = "ISL";
         setLanguage("isl");
         break;
       case "isl":
+        document.title = "ASL";
         setLanguage("asl");
         break;
     }
