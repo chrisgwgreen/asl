@@ -61,6 +61,7 @@ function App() {
   const [letter, setLetter] = useState(newLetter());
   const [isSign, setIsSign] = useState(false);
   const [language, setLanguage] = useState<language>("asl");
+  const [languageColor, setLanguageColor] = useState<string>("#6ED9BF");
 
   /*
    * Event Handlers
@@ -75,14 +76,17 @@ function App() {
       case "asl":
         document.title = "BSL";
         setLanguage("bsl");
+        setLanguageColor("#F4EC58");
         break;
       case "bsl":
         document.title = "ISL";
         setLanguage("isl");
+        setLanguageColor("#FF8084");
         break;
       case "isl":
         document.title = "ASL";
         setLanguage("asl");
+        setLanguageColor("#6ED9BF");
         break;
     }
   };
@@ -143,7 +147,7 @@ function App() {
       <Letter letter={letter} isSign={isSign} language={language} />
 
       <SignToggleWrapper>
-        <Button onClick={handleChangeLanguage} color="#F4EC58">
+        <Button onClick={handleChangeLanguage} color={languageColor}>
           {language.toUpperCase()}
         </Button>
       </SignToggleWrapper>
