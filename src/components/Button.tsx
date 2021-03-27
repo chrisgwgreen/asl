@@ -1,14 +1,21 @@
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components/macro";
+import Color from "color";
 import { useIsTabletViewport } from "../hooks";
 
 interface Props {
   children: ReactNode;
+  color?: string;
   onClick: () => void;
 }
 
-const ButtonWrapper = styled.button<{ isTabletViewport: boolean }>((props) => {
-  const { isTabletViewport } = props;
+const ButtonWrapper = styled.button<{
+  isTabletViewport: boolean;
+  color?: string;
+}>((props) => {
+  const { isTabletViewport, color = "#83af9b" } = props;
+
+  const bgColor = Color(color);
 
   return css`
     padding: 1rem 2rem;
@@ -16,11 +23,12 @@ const ButtonWrapper = styled.button<{ isTabletViewport: boolean }>((props) => {
     font-family: normal;
     outline: none;
     border: none;
-    background: #83af9b;
+    background: ${bgColor.toString()};
     cursor: pointer;
 
-    :hover {
-      background: #c8c8a9;
+    :hover,
+    :focus {
+      background: ${bgColor.darken(0.2).toString()};
     }
 
     ${isTabletViewport &&
@@ -31,19 +39,16 @@ const ButtonWrapper = styled.button<{ isTabletViewport: boolean }>((props) => {
 });
 
 export const Button = (props: Props) => {
-  const { children, onClick } = props;
+  const { children, onClick, color } = props;
 
   const isTabletViewport = useIsTabletViewport();
 
-  const handleClick = () => {
-    onClick();
-
-    // @ts-ignore
-    document.activeElement.blur();
-  };
-
   return (
-    <ButtonWrapper onClick={handleClick} isTabletViewport={isTabletViewport}>
+    <ButtonWrapper
+      onClick={onClick}
+      isTabletViewport={isTabletViewport}
+      color={color}
+    >
       {children}
     </ButtonWrapper>
   );
